@@ -1,0 +1,36 @@
+<%- include('partials/headerMain') -%>
+<section class="secundaryNavegation">
+    <ul class="flex items-center gap-12">
+        <li><a href="/<%= title %>/inbox">Inbox</a></li>
+        <li><a href="/<%= title %>/projects/inprogress">Projects</a></li>
+        <li><a href="/<%= title %>/tasks/due">Tasks</a></li>
+        <li><a href="/<%= title %>/goals">Goals</a></li>
+        <li><a href="/<%= title %>/Dashboard">Dashboard</a></li>
+    </ul>
+    <hr>
+</section>
+<section class="addingProject">
+    <div class="card">
+        <h2>Add task to project <%= project.name%></h2>
+        <form method="POST" action="/<%=title%>/projects/addTask/<%= project.id%>?_method=PUT" id="onlyForm">
+            <div class="inputsProject">
+                <div class="flex flex-column">
+                    <div class="inputs flex-column"> 
+                        <label for="name">Name
+                            <input type="text" id="name" name="name"placeholder="name of the task">
+                        </label>
+                        <label for="descrip">Description
+                            <textarea name="desc" id="descrip" cols="50" rows="8" name="description" placeholder="description of the task"></textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" >Add Task to project</button>
+            </div>
+        </form>
+    </div>
+</section>
+</section>
+
+<%- include('partials/footer') -%>

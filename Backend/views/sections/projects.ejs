@@ -1,0 +1,99 @@
+<%- include('partials/headerMain') -%>
+<section class="secundaryNavegation">
+    <ul class="flex items-center gap-12">
+        <li><a href="/<%= title %>/inbox">Inbox</a></li>
+        <li><a href="/<%= title %>/projects/inprogress">Projects</a></li>
+        <li><a href="/<%= title %>/tasks/due">Tasks</a></li>
+        <li><a href="/<%= title %>/goals">Goals</a></li>
+        <li><a href="/<%= title %>/Dashboard">Dashboard</a></li>
+    </ul>
+    <hr>
+</section>
+<section>
+    <div>  
+        <ul class="flex gap-12 justify-start">
+            <li><a href="/<%= title %>/projects/planned"><i></i>Planned</a></li>
+            <li><a href="/<%= title %>/projects/inprogress"><i></i>In progress</a></li>
+            <li><a href="/<%= title %>/projects/completed">Completed</a></li>
+        </ul>
+        <hr>
+    </div>
+</section>
+<section class="projects">
+        <% project.forEach((element,i) => { %>
+                    <div class="sCard">   
+                        <div key="<%= element.id%> ">
+                            <h3><%= element.name%> </h3>
+                            <span class="italic text-slate-400"><%= element.description %></span>
+                            <ul>
+                                <% if (subtask) { %>
+                                    <% subtask.forEach(task => { %>
+                                        <% task.forEach(sub => { %>
+                                            <% if (sub.projectId === element.id) { %>
+                                                <li>
+                                                    <span><%= sub.name %> </span>
+                                                </li>
+                                            <% } %>
+                                        <% }) %>
+                                    <% }) %>
+                                <% } %>
+                            </ul>
+                            <div class="radial-progress" style="--value:<%=element.process%>; --size: 2rem;" class="text-blue-600"><%=element.process%>%</div>
+                            <div>
+                                <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots<%=i%>" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
+                                </button>
+                                
+                                <!-- Dropdown menu -->
+                                <div id="dropdownDots<%=i%>" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
+                                        <li>
+                                        <a href="/<%=title%>/projects/addTask/<%=element.id%>" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add Task to the project</a>
+                                        </li>
+                                        <li>
+                                            <a href="/<%=title%>/projects/editTask/<%=element.id%>" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Task manager</a>
+                                        </li>
+                                        <li>
+                                        <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete project</a>
+                                        </li>
+                                        <li>
+                                        <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit Project</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        <% }) %>
+    </section>
+    <section class="addingProject">
+        <div class="card">
+            <h2>Create Project</h2>
+            <form method="POST" action="/<%=title%>/projects/planned" id="onlyForm">
+                <div class="inputsProject">
+                    <div class="flex flex-column">
+                        <div class="inputs flex-column"> 
+                            <label for="name">Name
+                                <input type="text" id="name" name="name"placeholder="name of the project">
+                            </label>
+                            <label for="descrip">Description
+                                <textarea name="desc" id="descrip" cols="50" rows="8" name="description" placeholder="description of the project"></textarea>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" >Add Project</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</section>
+
+<%- include('partials/footer') -%>
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+<%- include('partials/headerMain') -%>
+<section class="secundaryNavegation">
+    <ul class="flex items-center gap-12">
+        <li><a href="/<%= title %>/inbox">Inbox</a></li>
+        <li><a href="/<%= title %>/projects/inprogress">Projects</a></li>
+        <li><a href="/<%= title %>/tasks/due">Tasks</a></li>
+        <li><a href="/<%= title %>/goals">Goals</a></li>
+        <li><a href="/<%= title %>/Dashboard">Dashboard</a></li>
+    </ul>
+    <hr>
+</section>
+<section class="addingProject">
+    <div class="card">
+        <h2>Task manager of: <%= project.name%></h2>
+        <div class="">
+                    <div class="flex flex-column">
+                         <% if (subtask) { %>
+                             <% subtask.forEach(task => { %>
+                                <% task.forEach(sub => { %>
+                                        <li class="flex-row flex flex-spaceEnd">
+                                            <span><%= sub.name %> </span>
+                                            <p class="italic text-slate-400"> <%= sub.description %> </p>
+                                            <form method="POST" action="/<%=title%>/projects/editTask/<%= sub.id%>?_method=PUT">
+                                                <button class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 baseline"><% if (!sub.completed) { %>
+                                                    Mark as complete
+                                                <% } else { %>
+                                                    Mark as imcomplete
+                                                    <% } %> 
+                                                </button>    
+                                            </form>
+                                        </li>
+                                <% }) %>
+                            <% }) %>
+                        <% } %>
+                    
+                </div>
+        </div>
+    </div>
+</section>
+<%- include('partials/footer') -%>

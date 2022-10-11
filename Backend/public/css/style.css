@@ -1,0 +1,158 @@
+html{
+    font-family: 'baumans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important; 
+}
+
+.elements{
+    margin: 0 auto ;
+    max-width: 1300px;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'montserrat', 'baumans' !important;
+}
+
+.bg-main{
+    --tw-bg-opacity: 1;
+    background-color: #2E3747;
+}
+
+.bg-mainn{
+    background-color: #2E3747;
+}
+.text-color{
+    color: #f3f3f3;
+}
+.hover\:text-sky-700:hover{
+    --tw-text-opacity: 1 !important;
+    color: #9CB068 !important;
+}
+.text-sky-800 {
+    --tw-text-opacity: 1;
+    color: #9CB068 !important;;
+}
+
+.from-sky-400 {
+    --tw-gradient-to: #9CB068 !important;
+    
+}
+
+.to-cyan-300{
+    --tw-gradient-from: #3E4727 !important;
+}
+
+.flex{
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-space{
+    justify-content: space-evenly; 
+}
+
+.flex-spaceEnd{
+    justify-content: space-between;
+}
+
+.false{
+    display: none !important;    
+}
+
+.inputsProject{
+    display: flex;
+    justify-content: space-around;
+    padding: 0 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+input{
+    width: 100%;
+}
+textarea{
+    width: 100%;
+    resize: none !important;
+}
+
+.showLi{
+    list-style: inside !important;
+}
+ 
+.addingProject{
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+}
+.card{
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    color: #2E3747;
+    padding: 10px 40px;
+}
+
+.add-subtasks{
+    cursor: pointer;
+}
+
+.sCard{
+    color: #2E3747;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    width: 370px;
+    height: 160px;
+}
+
+.projects{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+main{
+    min-height: 500px;
+    height: auto;
+}
+
+.bg-green-700{
+    background-color: #3E4727 !important;
+} 
+
+.baseline{
+    align-items: baseline;
+}
+
+.bg-base-200{
+    background-color:#2E3747 !important ;
+}
+
+.bg-sky-900{
+    background-color:#f3f3f3 !important ;
+}
+
+.container{
+    margin: 0 auto !important;
+}
+
+:root{
+    background-color: #2E3747 !important;
+}
+
+.btn-primary{
+    background-color: #3E4727 !important;
+    font-family: 'baumans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important; ;
+    border-color: #9CB068 !important;
+}
+
+.mainBtn{
+    margin: 0px 5px !important;
+}
