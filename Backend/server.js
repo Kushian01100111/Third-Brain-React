@@ -59,8 +59,9 @@ app.use(passport.session());
 app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
-//app.use("/", mainRoutes); For new dosen't seem to be logical to use those, the fronden should have this elements on the own 
-//app.use("/main", appRoutes);
+app.use("/", mainRoutes); 
+// For new dosen't seem to be logical to use those, the fronden should have this elements on the own 
+app.use("/main", appRoutes);
 app.use("/personal", personalRoutes)
 app.use("/work", workRoutes)
 app.use("/college", collegeRoutes)

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const projectsController = require("../controllers/interactive/projects");
-const subTaskController = require("../controllers/personal/subTask");
+const subTaskController = require("../controllers/interactive/subTask");
 
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
