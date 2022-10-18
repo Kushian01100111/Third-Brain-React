@@ -7,6 +7,7 @@ const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
+const cors = require('cors-express')
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const appRoutes = require("./routes/appRoutes");
@@ -14,7 +15,15 @@ const personalRoutes = require("./routes/personal");
 const workRoutes = require("./routes/work");
 const collegeRoutes = require("./routes/college");
 
+//CORS septup
 
+app.use(cors({
+    allow : {
+      origin: '*',
+      methods: 'GET,PATCH,PUT,POST,DELETE,HEAD,OPTIONS',
+      headers: 'Content-Type, Authorization, Content-Length, X-Requested-With, X-HTTP-Method-Override'
+  }
+}));
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -57,6 +66,8 @@ app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
+
+
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes); 

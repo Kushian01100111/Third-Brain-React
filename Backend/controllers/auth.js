@@ -39,6 +39,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log(req.session)
       req.flash("success", { msg: "Success! You are logged in." });
       res.redirect(req.session.returnTo || "/main");
     });
@@ -57,6 +58,7 @@ exports.logout = (req, res) => {
   });
 };
 
+//Get request (Depriqueted)
 exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/main");
@@ -66,25 +68,33 @@ exports.getSignup = (req, res) => {
   });
 };
 
+ //POST request Valid one 
 exports.postSignup = (req, res, next) => {
+  console.log(req.body)
   const validationErrors = [];
-  if (!validator.isEmail(req.body.email))
+  if (!validator.isEmail(req.body.email)){
     validationErrors.push({ msg: "Please enter a valid email address." });
-  if (!validator.isLength(req.body.password, { min: 8 }))
+  }
+    
+  if (!validator.isLength(req.body.password, { min: 8 })){
     validationErrors.push({
       msg: "Password must be at least 8 characters long",
     });
-  
-  if (validationErrors.length) {
-    req.flash("errors", validationErrors);
-    return res.redirect("../signup");
   }
+    
+  if (validationErrors.length) {
+    return res.status(406).send({
+      errors: validationErrors,
+    });
+  }
+
+
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
 
   const user = new User({
-    userName: req.body.userName,
+    userName: req.body.name,
     email: req.body.email,
     password: req.body.password,
   });
@@ -96,10 +106,9 @@ exports.postSignup = (req, res, next) => {
         return next(err);
       }
       if (existingUser) {
-        req.flash("errors", {
-          msg: "Account with that email address or username already exists.",
+        return res.status(409).send({
+          errors: "Account with that email address or username already exists."
         });
-        return res.redirect("../signup");
       }
       user.save((err) => {
         if (err) {
@@ -109,7 +118,10 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/main");
+          console.log('Account created')
+          res.status(200).send({
+            done: true, 
+            user: user});
         });
       });
     }
