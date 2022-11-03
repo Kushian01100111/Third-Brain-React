@@ -2,6 +2,10 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 
+exports.getUser =(req,res) =>{
+  res.status(200).send({ user: req.user || null });
+}
+
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -11,7 +15,7 @@ exports.getLogin = (req, res) => {
     title: "Login",
   });
 };
-
+ //POST login
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
@@ -20,8 +24,9 @@ exports.postLogin = (req, res, next) => {
     validationErrors.push({ msg: "Password cannot be blank." });
 
   if (validationErrors.length) {
-    req.flash("errors", validationErrors);
-    return res.redirect("/login");
+    return res.status(406).send({
+      errors: validationErrors,
+    });
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -40,8 +45,10 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       console.log(req.session)
-      req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/main");
+      res.status(200).send({
+        done: true, 
+        user: user,
+        session: req.session});
     });
   })(req, res, next);
 };
